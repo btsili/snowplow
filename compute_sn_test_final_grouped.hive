@@ -1,0 +1,11 @@
+SELECT *
+FROM `dataiku`.`sn_test_final_2` a
+inner join (
+select network_userid,
+        count(distinct `Super Category`) as `Super Categories`,
+        count(distinct `Sub-Category`) as `Sub-Categories`,
+        count(distinct `Brand`) as Brands
+   from `dataiku`.`sn_test_final_2`
+GROUP BY network_userid
+        ) b on a.network_userid = b.network_userid
+Where  b.Brands>1

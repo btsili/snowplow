@@ -1,0 +1,125 @@
+{
+  "steps": [
+    {
+      "type": "ColumnsSelector",
+      "params": {
+        "keep": false,
+        "appliesTo": "COLUMNS",
+        "columns": [
+          "network_userid2",
+          "network_userid3",
+          "Super Category2",
+          "Sub-Category2"
+        ]
+      },
+      "metaType": "PROCESSOR",
+      "preview": false,
+      "disabled": false,
+      "alwaysShowComment": false
+    },
+    {
+      "type": "ColumnRenamer",
+      "params": {
+        "renamings": [
+          {
+            "from": "supcat_score",
+            "to": "Super Category Score"
+          },
+          {
+            "from": "supcat_sessions",
+            "to": "Super Category Sessions"
+          },
+          {
+            "from": "subcat_score",
+            "to": "Sub-Category Score"
+          },
+          {
+            "from": "subcat_sessions",
+            "to": "Sub-Category Sessions"
+          },
+          {
+            "from": "brand_score",
+            "to": "Brand Score"
+          },
+          {
+            "from": "brand_sessions",
+            "to": "Brand Sessions"
+          },
+          {
+            "from": "supcat_timedelta",
+            "to": "Super Category Timedelta"
+          },
+          {
+            "from": "subcat_timedelta",
+            "to": "Sub-Category Timedelta"
+          },
+          {
+            "from": "brand_timedelta",
+            "to": "Brand Timedelta"
+          },
+          {
+            "from": "supcat_events",
+            "to": "Super Category Events"
+          },
+          {
+            "from": "brand_events",
+            "to": "Brand Events"
+          },
+          {
+            "from": "subcat_events",
+            "to": "Sub-Category Events"
+          }
+        ]
+      },
+      "metaType": "PROCESSOR",
+      "preview": false,
+      "disabled": false,
+      "alwaysShowComment": false
+    },
+    {
+      "steps": [],
+      "metaType": "GROUP",
+      "preview": false,
+      "disabled": false,
+      "alwaysShowComment": false
+    }
+  ],
+  "tags": [],
+  "origin": "PREPARE_RECIPE",
+  "columnsSelection": {
+    "mode": "ALL"
+  },
+  "coloring": {
+    "scheme": "MEANING_AND_STATUS",
+    "individualColumns": [],
+    "valueColoringMode": "HASH"
+  },
+  "analysisColumnData": {},
+  "explorationSampling": {
+    "selection": {
+      "samplingMethod": "HEAD_SEQUENTIAL",
+      "partitionSelectionMethod": "ALL",
+      "maxRecords": 10000,
+      "targetRatio": 0.02
+    },
+    "autoRefreshSample": false,
+    "_refreshTrigger": 0
+  },
+  "vizSampling": {
+    "autoRefreshSample": false,
+    "_refreshTrigger": 0
+  },
+  "exploreUIParams": {
+    "autoRefresh": true
+  },
+  "globalSearchQuery": "",
+  "explorationFilters": [
+    {
+      "type": "global_search",
+      "$$hashKey": "0U9"
+    }
+  ],
+  "previewMode": "ALL_ROWS",
+  "charts": [],
+  "chartsEngine": "LINO"
+}

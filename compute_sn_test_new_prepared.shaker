@@ -1,0 +1,224 @@
+{
+  "steps": [
+    {
+      "type": "ColumnsSelector",
+      "params": {
+        "keep": true,
+        "appliesTo": "COLUMNS",
+        "columns": [
+          "collector_tstamp",
+          "event",
+          "event_id",
+          "use_ipaddress",
+          "user_fingerprint",
+          "domain_userid",
+          "domain_sessionidx",
+          "network_userid",
+          "geo_country",
+          "geo_city",
+          "geo_zipcode",
+          "geo_latitude",
+          "geo_longitude",
+          "geo_region_name",
+          "ip_isp",
+          "ip_organization",
+          "page_url",
+          "page_title",
+          "page_urlhost",
+          "page_urlpath",
+          "refr_urlhost",
+          "refr_urlpath",
+          "refr_medium",
+          "refr_source",
+          "refr_term",
+          "mkt_medium",
+          "mkt_source",
+          "mkt_term",
+          "mkt_content",
+          "mkt_campaign",
+          "se_category",
+          "se_action",
+          "se_label",
+          "se_property",
+          "se_value",
+          "br_name",
+          "br_family",
+          "br_lang",
+          "br_cookies",
+          "os_name",
+          "os_family",
+          "os_manufacturer",
+          "os_timezone",
+          "dvce_type",
+          "temp08",
+          "temp10"
+        ]
+      },
+      "metaType": "PROCESSOR",
+      "preview": false,
+      "disabled": false,
+      "alwaysShowComment": false
+    },
+    {
+      "type": "FindReplace",
+      "params": {
+        "output": "",
+        "normalization": "EXACT",
+        "matching": "PATTERN",
+        "stopAfterFirstMatch": false,
+        "mapping": [
+          {
+            "from": "\\bwww\\."
+          },
+          {
+            "from": "\\bm\\."
+          },
+          {
+            "from": "\\bsecure\\."
+          }
+        ],
+        "appliesTo": "SINGLE_COLUMN",
+        "columns": [
+          "page_urlhost"
+        ]
+      },
+      "metaType": "PROCESSOR",
+      "preview": false,
+      "disabled": false,
+      "alwaysShowComment": false
+    },
+    {
+      "type": "FilterOnValue",
+      "params": {
+        "values": [
+          "",
+          "-"
+        ],
+        "matchingMode": "FULL_STRING",
+        "normalizationMode": "EXACT",
+        "action": "REMOVE_ROW",
+        "booleanMode": "OR",
+        "appliesTo": "COLUMNS",
+        "columns": [
+          "domain_userid",
+          "network_userid"
+        ]
+      },
+      "metaType": "PROCESSOR",
+      "preview": false,
+      "disabled": false,
+      "alwaysShowComment": false
+    },
+    {
+      "type": "FilterOnValue",
+      "params": {
+        "values": [
+          "struct"
+        ],
+        "matchingMode": "FULL_STRING",
+        "normalizationMode": "EXACT",
+        "action": "REMOVE_ROW",
+        "booleanMode": "AND",
+        "appliesTo": "SINGLE_COLUMN",
+        "columns": [
+          "event"
+        ]
+      },
+      "metaType": "PROCESSOR",
+      "preview": false,
+      "disabled": false,
+      "alwaysShowComment": false
+    },
+    {
+      "type": "MemoryEquiJoinerFuzzy",
+      "params": {
+        "leftCol": "page_urlhost",
+        "rightInput": "Hosted_Sites_3_June_2016_HDFS_prepared",
+        "rightCol": "URL",
+        "copyColumns": [
+          "Brand",
+          "Related Brand",
+          "Brand for Reporting Purposes",
+          "Brand vs Campaign Site",
+          "Global/Regional/Local Brand",
+          "Sub-Category",
+          "Super Category",
+          "Country",
+          "Sub-Market",
+          "Market"
+        ],
+        "copyPrefix": "",
+        "fuzzy": true,
+        "maxLevenshtein": 1,
+        "forceRawLevenshteinEngine": false,
+        "sortAlphabetically": false,
+        "clearStopWords": false,
+        "normalize": true,
+        "stem": false,
+        "language": "english"
+      },
+      "metaType": "PROCESSOR",
+      "preview": false,
+      "disabled": false,
+      "alwaysShowComment": false
+    },
+    {
+      "type": "FilterOnValue",
+      "params": {
+        "values": [
+          "Netherlands"
+        ],
+        "matchingMode": "SUBSTRING",
+        "normalizationMode": "LOWERCASE",
+        "action": "KEEP_ROW",
+        "booleanMode": "AND",
+        "appliesTo": "SINGLE_COLUMN",
+        "columns": [
+          "Country"
+        ]
+      },
+      "metaType": "PROCESSOR",
+      "preview": false,
+      "disabled": false,
+      "alwaysShowComment": false
+    }
+  ],
+  "tags": [],
+  "origin": "PREPARE_RECIPE",
+  "columnsSelection": {
+    "mode": "ALL"
+  },
+  "coloring": {
+    "scheme": "MEANING_AND_STATUS",
+    "individualColumns": [],
+    "valueColoringMode": "HASH"
+  },
+  "analysisColumnData": {},
+  "explorationSampling": {
+    "selection": {
+      "samplingMethod": "HEAD_SEQUENTIAL",
+      "partitionSelectionMethod": "ALL",
+      "maxRecords": 10000,
+      "targetRatio": 0.02
+    },
+    "autoRefreshSample": false,
+    "_refreshTrigger": 0
+  },
+  "vizSampling": {
+    "autoRefreshSample": false,
+    "_refreshTrigger": 0
+  },
+  "exploreUIParams": {
+    "autoRefresh": true
+  },
+  "globalSearchQuery": "",
+  "explorationFilters": [
+    {
+      "type": "global_search",
+      "$$hashKey": "6SI"
+    }
+  ],
+  "previewMode": "ALL_ROWS",
+  "charts": [],
+  "chartsEngine": "LINO"
+}
